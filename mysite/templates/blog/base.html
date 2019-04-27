@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% load static %}
+<html >
+  <head>
+    <meta charset="utf-8">
+    <title>BLOG</title>
+    <!--Bootstrap File link  -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--  MEDIUM STYLE EDITOR-->
+    <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+<!--INTERNAL CSS FILE LINK  -->
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+<!--Font STYLING LINK  -->
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  </head>
+
+
+  <body class='loader'>
+<!--Navigation Bar -->
+    <ul class="nav nav-pills">
+      <li class="nav-item"><a class="navbar-brand bigbrand" href="{% url 'post_list' %}">MYBLOG</a></li>
+      <li class="nav-item"><a  class="nav-link" href="{% url 'about' %}">ABOUT</a> </li>
+      <li class="nav-item"><a class="nav-link" href="https://www.github.com">GITHUB</a> </li>
+      <li class="nav-item"><a class="nav-link" href="https://linkedin.com">LINKEDIN</a> </li>
+    </ul>
+
+
+  <ul class="nav nav-pills navbar-right">
+    {% if user.is_authenticated %}
+  <li class="nav-item navbar-right"> <a href="{% url 'post_new' %}">NEW POST </a> </li>
+     <li class="nav-item navbar-right"> <a href="{% url 'post_draft_list' %}"> DRAFT LIST </a> </li>
+     <li class="nav-item navbar-right"> <a href="{% url 'logout' %}"> LOG OUT </a> </li>
+  <li class="nav-item navbar-right"> <a >WELCOME : {{user.username }}</a> </li>
+     {% else %}
+     <li class="nav-item navbar-right"> <a class="nav navbar-right" href="{% url 'login' %}"></a>LOG OUT </li>
+    {% endif %}
+  </ul>
+
+
+<!--BLOG CONTENT  -->
+<div class="content container">
+  <div class="row">
+    <div class="col-mid-8">
+      <div class="blog_posts">
+        {% block content %}
+
+        {% endblock %}
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+  </body>
+</html>
